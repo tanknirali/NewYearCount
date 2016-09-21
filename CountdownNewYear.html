@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Happy New Year</title>
+		<style type="text/css">
+		.countdownBox{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform : translateX(-50%) translateY(-50%);
+			text-align: center;
+			border: 1px solid #fff;
+			padding: 10px;
+			box-shadow: 0 0 5px 5px #ddd;
+		}
+		.countdownNumbers {
+			font-size: 150px;
+		}
+		.countdownLabels{
+			font-size: 20px;
+			font-weight: bold;
+		}
+		#displayText{
+			text-align: center;
+			font-size: 40px;
+		}
+		</style>
+	</head>
+	<body>
+		<table class="countdownBox">
+			<tr style="font-size:40px;">
+				<td colspan="7">COUNTDOWN</td>
+			</tr>
+			<tr class="countdownNumbers">
+				<td id="days">120</td>
+				<td> : </td>
+				<td id="hours">12</td>
+				<td> : </td>
+				<td id="mins">60</td>
+				<td> : </td>
+				<td id="secs">60</td>
+			</tr>
+			<tr class="countdownLabels">
+				<td>DAYS</td>
+				<td> </td>
+				<td>HOURS</td>
+				<td>  </td>
+				<td>MINUTES</td>
+				<td>  </td>
+				<td>SECONDS</td>	
+			</tr>
+		</table>
+		<div id="displayText">
+		</div>
+		<script type="text/javascript">	
+			var timer = null;
+
+			function newYearCountdown(){
+				var currentDate = new Date();
+				var eventDate = new Date(2016, 11, 31, 23, 59, 59);
+
+				var currentTime = currentDate.getTime();
+				
+				var eventTime = eventDate.getTime();
+
+				var timeLeft = eventTime - currentTime;
+
+				var s = Math.floor(timeLeft / 1000);
+				var secs = s;
+				var m = Math.floor(s / 60);
+				var mins = m;
+				var h = Math.floor(m / 60);
+				var hrs = h;
+				var d = Math.floor(h / 24);
+				var days = d;
+
+				h %= 24;
+				m %= 60;
+				s %= 60;
+
+				if(h<10){
+					h = "0" + h;
+				}
+				if(m<10){
+					m = "0" + m;
+				}
+				if(s<10){
+					s = "0" + s;
+				}
+				
+
+				document.getElementById("days").textContent = d;
+				document.getElementById("days").innerText = d;
+
+				document.getElementById("hours").textContent = h;
+				document.getElementById("mins").textContent = m;
+				document.getElementById("secs").textContent = s;
+				var disp = document.getElementById("displayText");
+				
+				if(secs<1 && mins==0 && hrs==0 && days==0){
+					disp.innerHTML = '<h2>Happy New Year!!!</h2>';
+					clearTimeout(timer);
+					console.log("timer "+timer);
+					return;
+				}
+				
+				timer = setTimeout(function(){newYearCountdown()}, 1000);
+				
+			}
+
+		newYearCountdown();
+		</script>
+	</body>
+</html>
